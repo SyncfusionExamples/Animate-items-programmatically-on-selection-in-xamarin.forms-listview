@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sync = "clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:local = "clr-namespace:Selection"
+             x:Class="Selection.SelectionPage">
+  <ContentPage.BindingContext>
+    <local:ViewModel x:Name="ViewModel" />
+  </ContentPage.BindingContext>
+  
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <DataTemplate x:Name="ItemTemplate"  x:Key="ItemTemplate">
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="1"/>
+          </Grid.RowDefinitions>
+        <Frame HasShadow="True" BackgroundColor="Transparent" Padding="10" Grid.Row="0">
+          <Grid>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto"/>
+              <RowDefinition Height="*"/>
+              <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Label x:Name="TitleLabel" LineBreakMode="NoWrap" Text="{Binding Title}"
+                   FontAttributes="Bold" TextColor="Black"/>
+
+            <Grid Grid.Row="1">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+              </Grid.ColumnDefinitions>
+              <Label x:Name="DescriptionLabel" Text="{Binding Description}" TextColor="Teal"/>
+              <Image x:Name="Image" Grid.Column="1" Source="{Binding Imagesource}" Margin="10,0,0,10"/>
+            </Grid>
+
+            <Frame Grid.Row="2" Padding="4,2,4,2" BackgroundColor="#FFE7E8E9" HorizontalOptions="Start" VerticalOptions="End">
+              <Label x:Name="TagLabel" LineBreakMode="NoWrap" Text="{Binding Tag}"
+                      FontSize="10" TextColor="Black"/>
+            </Frame>
+          </Grid>
+        </Frame>
+        <Grid Grid.Row="1" BackgroundColor="Gray" HeightRequest="1" />
+       </Grid>
+      </DataTemplate>
+    </ResourceDictionary>
+  </ContentPage.Resources>
+
+  <Grid Margin="0">
+        <sync:SfListView x:Name="listView" ItemsSource="{Binding Items}" SelectionGesture="Tap" SelectionMode="Single"
+                     ItemTemplate="{StaticResource ItemTemplate}" SelectionBackgroundColor="Fuchsia"
+                     BackgroundColor="Transparent"
+                     ItemSize="120">
+            <sync:SfListView.Behaviors>
+                <local:Behavior/>
+            </sync:SfListView.Behaviors>
+        </sync:SfListView>
+    </Grid>
+</ContentPage>
